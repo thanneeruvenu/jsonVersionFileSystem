@@ -1,3 +1,17 @@
 micronaut:
   application:
     name: jsonVersionFileSystem
+  server:
+    port: 8081
+    context-path: /jsonVersionFileSystem
+  config-client:
+    enabled: true
+  session:
+    http:
+      cookie: true
+      header: true
+
+json:
+  file:
+    location: C:\\JsonVersionFileDemo
+
