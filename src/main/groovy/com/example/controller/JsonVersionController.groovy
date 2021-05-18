@@ -68,7 +68,8 @@ class JsonVersionController {
     @Post("/revertFileContent")
     HttpResponse revert(@Body Map data) {
         jsonVersionService.revertFileCurrentVersion(data)
-        HttpResponse.created(data)
+        Map fileVersionsChangeLog = jsonVersionService.fetchFileVersions(data.name)
+        HttpResponse.created(fileVersionsChangeLog)
     }
 
 

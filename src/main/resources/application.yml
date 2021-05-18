@@ -4,12 +4,15 @@ micronaut:
   server:
     port: 8081
     context-path: /jsonVersionFileSystem
+    cors:
+      enabled: true
   config-client:
     enabled: true
   session:
     http:
       cookie: true
       header: true
+
 
 json:
   file:

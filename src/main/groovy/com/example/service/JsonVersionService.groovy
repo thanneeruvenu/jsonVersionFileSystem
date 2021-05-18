@@ -41,7 +41,7 @@ class JsonVersionService {
     void revertFileCurrentVersion(Map inputData){
         Map changeLogContent = jsonVersionRepository.getContentFromChangeLogFile(jsonVersionLogFileName, inputData.name)
         LOGGER.info("change log file content  : " + changeLogContent.toString())
-        changeLogContent.currentVesion = inputData.version
+        changeLogContent.currentVersion = inputData.version
         jsonVersionRepository.createChangeLogFileWithContent(jsonVersionLogFileName, inputData.name, changeLogContent)
     }
     
@@ -72,7 +72,7 @@ class JsonVersionService {
             LOGGER.info("change log file content  : " + changeLogContent.toString())
             String versionNumber = "v${getVersionNumber(changeLogContent.latestVersion) + 1}"
             jsonVersionRepository.createJsonFileWithContent(name, versionNumber, jsonData)
-            changeLogContent.currentVesion = versionNumber
+            changeLogContent.currentVersion = versionNumber
             changeLogContent.latestVersion = versionNumber
             changeLogContent.data << [name        : name, version: versionNumber, modifiedBy: jsonData.owner,
                                       modifiedDate: jsonData.fileTimestamp, commitMessage: inputData.commitMessage]
@@ -81,7 +81,7 @@ class JsonVersionService {
         } else {
             jsonVersionRepository.createJsonFileWithContent(name, jsonData)
             LOGGER.info("$name version 0 file has been created !!")
-            jsonVersionRepository.createChangeLogFileWithContent(jsonVersionLogFileName, name, [currentVesion: "v0", latestVersion: "v0",
+            jsonVersionRepository.createChangeLogFileWithContent(jsonVersionLogFileName, name, [currentVersion: "v0", latestVersion: "v0",
                                                                                                 data         : [[name        : name, version: "v0", modifiedBy: jsonData.owner,
                                                                                                                  modifiedDate: jsonData.fileTimestamp, commitMessage: inputData.commitMessage]]])
         }
